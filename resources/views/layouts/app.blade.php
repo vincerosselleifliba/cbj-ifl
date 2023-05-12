@@ -55,6 +55,7 @@ if (!isset($seo)) {
     {!! $siteSetting->google_tag_manager_for_head !!}
 </head>
 <body>
+    
     @yield('content')
 
     <script src="https://kit.fontawesome.com/61c5d3d4be.js" crossorigin="anonymous"></script>
