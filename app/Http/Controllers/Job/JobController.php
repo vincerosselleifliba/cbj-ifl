@@ -164,6 +164,7 @@ class JobController extends Controller
 
         /*         * ************************************************** */
         
+        
         $seo = Seo::where('seo.page_title', 'like', 'jobs')->first();
         return view('job.list')
                         ->with('functionalAreas', $this->functionalAreas)

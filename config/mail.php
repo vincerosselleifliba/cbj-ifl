@@ -14,7 +14,7 @@ return [
       |            "sparkpost", "log", "array"
       |
      */
-    'driver' => env('MAIL_DRIVER', 'mail'),
+    'driver' => env('MAIL_DRIVER', 'smtp'),
     /*
       |--------------------------------------------------------------------------
       | SMTP Host Address
@@ -25,7 +25,7 @@ return [
       | the Mailgun mail service which will provide reliable deliveries.
       |
      */
-    'host' => env('MAIL_HOST', 'smtp.mailgun.org'),
+    'host' => env('MAIL_HOST', 'smtp.gmail.com'),
     /*
       |--------------------------------------------------------------------------
       | SMTP Host Port
