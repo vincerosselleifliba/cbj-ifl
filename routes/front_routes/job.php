@@ -4,6 +4,7 @@ Route::get('job/{slug}', 'Job\JobController@jobDetail')->name('job.detail');
 Route::get('apply/{slug}', 'Job\JobController@applyJob')->name('apply.job');
 Route::post('apply/{slug}', 'Job\JobController@postApplyJob')->name('post.apply.job');
 Route::get('jobs', 'Job\JobController@jobsBySearch')->name('job.list');
+
 Route::get('add-to-favourite-job/{job_slug}', 'Job\JobController@addToFavouriteJob')->name('add.to.favourite');
 Route::get('remove-from-favourite-job/{job_slug}', 'Job\JobController@removeFromFavouriteJob')->name('remove.from.favourite');
 Route::get('my-job-applications', 'Job\JobController@myJobApplications')->name('my.job.applications');

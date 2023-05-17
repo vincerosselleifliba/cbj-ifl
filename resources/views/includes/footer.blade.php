@@ -59,7 +59,23 @@
                     $functionalAreas = App\FunctionalArea::getUsingFunctionalAreas(10);
                     @endphp
                     @foreach($functionalAreas as $functionalArea)
-                    <li><a href="{{ route('job.list', ['functional_area_id[]'=>$functionalArea->functional_area_id]) }}">{{$functionalArea->functional_area}}</a></li>
+                    {{-- <li><a href="{{ route('job.list', ['functional_area[]'=>$functionalArea->functional_area]) }}">{{$functionalArea->functional_area}}</a></li> --}}
+                    {{-- <li><a href="{{ route('job.list', ['functional_area' => str_replace(' ', '-', $functionalArea->functional_area)]) }}">{{ $functionalArea->functional_area }}</a></li> --}}
+                    {{-- <li><a href="{{ route('job.list', ['functional_area' => strtolower(str_replace(' ', '-', $functionalArea->functional_area))]) }}">{{ $functionalArea->functional_area }}</a></li> --}}
+                    <li><a href="{{ route('job.list', ['functional_area' => strtolower(str_replace([' ', '&'], ['-', 'and'], preg_replace('/\s*\([^)]*\)/', '', $functionalArea->functional_area)))]) }}">{{($functionalArea->functional_area)}}</a></li>
+
+
+                    
+                    
+
+                    {{-- <li><a href="{{ url('/jobs/functional_area/'.strtolower(str_replace(' ', '-', preg_replace('/\s*\([^)]*\)/', '', $functionalArea->functional_area)))) }}">{{ preg_replace('/\s*\([^)]*\)/', '', $functionalArea->functional_area) }}</a></li> --}}
+
+
+
+
+                    {{-- <li><a href="{{ url('jobs/functional_area/'.str_replace(' ', '-', $functionalArea->functional_area)) }}">{{ $functionalArea->functional_area }}</a></li> --}}
+
+
                     @endforeach
                 </ul>
             </div>

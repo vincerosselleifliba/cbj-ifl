@@ -191,7 +191,8 @@ class TalentController extends Controller
 	
     public function talents($slug)
     {   
-	
+        
+    
        $job_skills = JobSkill::where('job_skill',$slug)->limit(1)->get()->first();
 	   
 	   if (isset($job_skills)){

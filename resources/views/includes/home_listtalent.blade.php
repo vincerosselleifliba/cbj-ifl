@@ -13,8 +13,10 @@
          @endif
          @foreach($talent_category['talent_list'] as $talent)
 
-            <li class=""><a href="/talents/{{$talent['job_skill']}}" data-testid="skill-link" class="">{{$talent['job_skill']}}</a></li>
-            
+            <li class=""><a href="/talents/{{$talent['job_skill']}}" data-testid="skill-link" class="">{{ucwords(str_replace('-', ' ', $talent['job_skill']))}}</a></li>
+
+
+
          @endforeach
          <li class="">
                <a href="/designers" class="_33DCQ6Tb  ">

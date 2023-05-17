@@ -163,7 +163,7 @@ class JobController extends Controller
         $currencies = DataArrayHelper::currenciesArray();
 
         /*         * ************************************************** */
-
+        
         $seo = Seo::where('seo.page_title', 'like', 'jobs')->first();
         return view('job.list')
                         ->with('functionalAreas', $this->functionalAreas)

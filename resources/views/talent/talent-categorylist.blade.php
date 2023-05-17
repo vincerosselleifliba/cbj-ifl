@@ -24,8 +24,8 @@
             <!-- Search Result and sidebar start -->
 
             <div class="row pb-3"> 
-				 <div class="col-lg-12 col-sm-12"> <h1><?=$job_skills->job_skill?></h1>
-				<p class="d-block">Check out <?=$job_skills->job_skill?> with the skills you need for your next job.</p>
+				 <div class="col-lg-12 col-sm-12"> <h1><?=ucwords(str_replace('-', ' ',  $job_skills->job_skill))?></h1>
+				<p class="d-block">Check out <?=ucwords(str_replace('-', ' ',  $job_skills->job_skill))?> with the skills you need for your next job.</p>
 				</div>
 			</div>
             <div class="row"> 
