@@ -187,6 +187,52 @@ class JobController extends Controller
                         ->with('jobExperienceIdsArray', $jobExperienceIdsArray)
                         ->with('seo', $seo)
                         ->with('talent_categories', $talent_categories);
+
+        // Copied code from job.list         
+        return view('job.functional_areas')
+                        ->with('functionalAreas', $this->functionalAreas)
+                        ->with('countries', $this->countries)
+                        ->with('currencies', array_unique($currencies))
+                        ->with('jobs', $jobs)
+                        ->with('jobTitlesArray', $jobTitlesArray)
+                        ->with('skillIdsArray', $skillIdsArray)
+                        ->with('countryIdsArray', $countryIdsArray)
+                        ->with('stateIdsArray', $stateIdsArray)
+                        ->with('cityIdsArray', $cityIdsArray)
+                        ->with('companyIdsArray', $companyIdsArray)
+                        ->with('industryIdsArray', $industryIdsArray)
+                        ->with('functionalAreaIdsArray', $functionalAreaIdsArray)
+                        ->with('careerLevelIdsArray', $careerLevelIdsArray)
+                        ->with('jobTypeIdsArray', $jobTypeIdsArray)
+                        ->with('jobShiftIdsArray', $jobShiftIdsArray)
+                        ->with('genderIdsArray', $genderIdsArray)
+                        ->with('degreeLevelIdsArray', $degreeLevelIdsArray)
+                        ->with('jobExperienceIdsArray', $jobExperienceIdsArray)
+                        ->with('seo', $seo)
+                        ->with('talent_categories', $talent_categories);
+        
+        return view('job.industries')
+                        ->with('functionalAreas', $this->functionalAreas)
+                        ->with('countries', $this->countries)
+                        ->with('currencies', array_unique($currencies))
+                        ->with('jobs', $jobs)
+                        ->with('jobTitlesArray', $jobTitlesArray)
+                        ->with('skillIdsArray', $skillIdsArray)
+                        ->with('countryIdsArray', $countryIdsArray)
+                        ->with('stateIdsArray', $stateIdsArray)
+                        ->with('cityIdsArray', $cityIdsArray)
+                        ->with('companyIdsArray', $companyIdsArray)
+                        ->with('industryIdsArray', $industryIdsArray)
+                        ->with('functionalAreaIdsArray', $functionalAreaIdsArray)
+                        ->with('careerLevelIdsArray', $careerLevelIdsArray)
+                        ->with('jobTypeIdsArray', $jobTypeIdsArray)
+                        ->with('jobShiftIdsArray', $jobShiftIdsArray)
+                        ->with('genderIdsArray', $genderIdsArray)
+                        ->with('degreeLevelIdsArray', $degreeLevelIdsArray)
+                        ->with('jobExperienceIdsArray', $jobExperienceIdsArray)
+                        ->with('seo', $seo)
+                        ->with('talent_categories', $talent_categories);
+        // End of copied code from job.list
     }
 
     public function jobDetail(Request $request, $job_slug)

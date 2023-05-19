@@ -1,137 +1,175 @@
 @extends('layouts.app')
 
 @section('content') 
+
 <!-- Header start --> 
+
 @include('includes.header') 
+
 <!-- Header end --> 
+
 <!-- Inner Page Title start --> 
-@include('includes.inner_page_title', ['page_title'=>__('Talent Search')]) 
-<!-- @include('flash::message') -->
+
+@include('includes.inner_page_title', ['page_title'=>__('Job Listing')]) 
+
+
+
+
+
+@include('flash::message')
+
 @include('includes.inner_top_search')
 
 
-	<?php
-		$job_skill_name = $job_skills->job_skill;
-	?>
- 
 
 <!-- Inner Page Title end -->
 
 <div class="listpgWraper">
 
     <div class="container">
-			
+
+        
+
+        <form action="{{route('job.functional_areas')}}" method="get">
+
             <!-- Search Result and sidebar start -->
 
-            <div class="row pb-3"> 
-				 <div class="col-lg-12 col-sm-12"> 
-                    <h1><?=ucwords(str_replace('-', ' ',  $job_skills->job_skill))?></h1>
-                    <p class="d-block">
-                        Check out <?=ucwords(str_replace('-', ' ',  $job_skills->job_skill))?> with the skills you need for your next job.
-                    </p>
-				</div>
-			</div>
             <div class="row"> 
 
-          
-                <div class="col-lg-12 col-sm-12"> 
-				<div class="row row-cols-1  row-cols-md-4 row-cols-lg-3">
-					<!-- talent List -->      
-                    
-					   @if(isset($profile_skills) && count($profile_skills))  @foreach($profile_skills as $profile_skill)
-						   <pre><?php //print_r($ProfileSummary[$user->id]);
-					 
-				/* 	   echo $profile_skill->user_id;
-					   echo $profile_skill->profile_headline;
-					   echo $profile_skill->keywords_tags;
-				
-					   echo $profile_skill->summary; */
+                @include('includes.job_list_side_bar')
 
-							
-					   ?></pre>
-						<div class="col-lg-3 col-md-4"> 
-						<div class="card user-card list-talent mb-4">
-							<div>
-								<h5 class="text-center pt-3">{{$profile_skill->first_name}}</h5>
-							</div>
-							<div class="card-block">
-								<div class="p-4">
-								<div class="user-image text-center">
-								<?php
-									if ($profile_skill->image != ""){
-										$img = $profile_skill->image;
-									}else{
-										$img = "avatar7.png";
-									}
-								?>
-									<img src="https://onlinebestjobs.ph/user_images/{{$img}}" class="rounded-circle img-thumbnail w-75" alt="User-Profile-Image">
-								 
-								</div>
-								<h5 class="f-w-600 m-t-25 m-b-10"><?=$profile_skill->profile_headline?></h5>
-								<span><?=$profile_skill->keywords_tags?></span>
-								<p class="text-muted">Active | Male | Born 23.05.1992</p>
-								<hr>
-								<p class="m-t-15 text-muted"><?=$profile_skill->summary;?><p>
-								<hr>
-								<div class="row justify-content-center user-social-link">
-									<div class="col-auto"><a href="#!"><i class="fa fa-facebook text-facebook"></i></a></div>
-									<div class="col-auto"><a href="#!"><i class="fa fa-twitter text-twitter"></i></a></div>
-									<div class="col-auto"><a href="#!"><i class="fa fa-dribbble text-dribbble"></i></a></div>
-								</div>
-							</div>
-						</div>
-						</div>
-					</div>
-					
+                <div class="col-lg-9 col-md-9 col-sm-12"> 
+
+                    <!-- Search List -->
+
+                    <ul class="searchList">
+                        <!-- job start --> 
+                        @if(isset($jobs) && count($jobs)) 
+                        
+                        <?php $count_1 = 1; ?>
+
+                          @foreach($jobs as $job) 
+                          
+                          @php $company = $job->getCompany();  @endphp
+
+                             <?php if(isset($company)) { ?>
+
+                                <?php if($count_1 == 7) {?>
+
+                                    <li class="inpostad">{!! $siteSetting->listing_page_horizontal_ad !!}</li>
+
+                                <?php }else{ ?>
+                                    <li>
+
+                                        <div class="row">
+
+                                            <div class="col-md-8 col-sm-8">
+
+                                                <div class="jobimg">{{$company->printCompanyImage()}}</div>
+
+                                                <div class="jobinfo">
+
+                                                    <h3><a href="{{route('job.detail', [$job->slug])}}" title="{{$job->title}}">{{$job->title}}</a></h3>
+
+                                                    <div class="companyName">
+                                                        <a href="{{route('company.detail', $company->slug)}}" title="{{$company->name}}">{{$company->name}}</a>
+                                                    </div>
+
+                                                    <div class="location">
+
+                                                        <label class="fulltime" title="{{$job->getJobType('job_type')}}">{{$job->getJobType('job_type')}}</label>
+
+                                                        - <span>{{$job->getCity('city')}}</span>
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="clearfix"></div>
+
+                                            </div>
+
+                                            <div class="col-md-4 col-sm-4">
+
+                                                <div class="listbtn">
+                                                    <a href="{{route('job.detail', [$job->slug])}}">{{__('View Details')}}</a>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                        <p>{{\Illuminate\Support\Str::limit(strip_tags($job->description), 150, '...')}}</p>
+
+                                    </li>
+
+						        <?php } ?>
+
+                            <?php $count_1++; ?>
+
+						<?php } ?>
+
+                        <!-- job end --> 
+
                         @endforeach @endif
-					<!-- list end -->
-				 </div>	
-				<!-- Pagination Start -->
 
-                {{-- <div class="pagiWrap">
+                            <!-- job end -->
 
-                    <div class="row">
+                    </ul>
 
-                        <div class="col-md-5">
+                    <!-- Pagination Start -->
 
-                            <div class="showreslt">
+                    <div class="pagiWrap">
 
-                                {{__('Showing Pages')}} : {{ $ProfileSummary->firstItem() }} - {{ $ProfileSummary->lastItem() }} {{__('Total')}} {{ $ProfileSummary->total() }}
+                        <div class="row">
+
+                            <div class="col-md-5">
+
+                                <div class="showreslt">
+
+                                    {{__('Showing Pages')}} : {{ $jobs->firstItem() }} - {{ $jobs->lastItem() }} {{__('Total')}} {{ $jobs->total() }}
+
+                                </div>
+
+                            </div>
+
+                            <div class="col-md-7 text-right">
+
+                                @if(isset($jobs) && count($jobs))
+
+                                {{ $jobs->appends(request()->query())->links() }}
+
+                                @endif
 
                             </div>
 
                         </div>
 
-                        <div class="col-md-7 text-right">
-
-                            @if(isset($ProfileSummary) && count($ProfileSummary))
-
-                            {{ $ProfileSummary->appends(request()->query())->links() }}
-
-                            @endif
-
-                        </div>
-
                     </div>
 
-                </div> --}}
-
                     <!-- Pagination end --> 
-
-                   
-
-
-
                 </div>
 
 				
 
+				<!-- <div class="col-lg-3 col-sm-6 pull-right">
+
+                    Sponsord By
+
+                    <div class="sidebar">
+
+                        <h4 class="widget-title">{{__('Sponsord By')}}</h4>
+
+                        <div class="gad">{!! $siteSetting->listing_page_vertical_ad !!}</div>
+
+                    </div>
+
+                </div> -->
 
 				
 
             </div>
 
-
+        </form>
 
     </div>
 
@@ -204,6 +242,9 @@
     </div>
 
 </div>
+
+<!-- back to top -->
+@include('includes.back_to_top')
 
 @include('includes.footer')
 

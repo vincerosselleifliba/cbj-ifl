@@ -3,6 +3,12 @@ Route::get('job/talent/{slug}', 'JobsController@jobtalent');
 Route::get('job/{slug}', 'Job\JobController@jobDetail')->name('job.detail');
 Route::get('apply/{slug}', 'Job\JobController@applyJob')->name('apply.job');
 Route::post('apply/{slug}', 'Job\JobController@postApplyJob')->name('post.apply.job');
+
+// Added code
+Route::get('jobs/functional-area/{functional_areas}', 'Job\JobController@jobsBySearch')->name('job.functional_areas');
+Route::get('jobs/industry/{industries}', 'Job\JobController@jobsBySearch')->name('job.industries');
+// End of added code
+
 Route::get('jobs', 'Job\JobController@jobsBySearch')->name('job.list');
 
 Route::get('add-to-favourite-job/{job_slug}', 'Job\JobController@addToFavouriteJob')->name('add.to.favourite');
